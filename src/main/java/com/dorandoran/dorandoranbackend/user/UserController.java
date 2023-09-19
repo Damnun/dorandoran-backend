@@ -22,23 +22,18 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/create")
-    public String create(@RequestParam @Nullable String userName, String nickName, Integer age, @Nullable String sex,
-                         String password, String description, @Nullable String hobit, String accountId) {
+    public Long create(@RequestParam String nickName, Integer age, String sex,
+                         String password, String description, String accountId) {
         User user = new User();
         user.setAccountId(accountId);
         user.setPassword(password);
-        user.setName(userName);
         user.setNickname(nickName);
         user.setAge(age);
         user.setSex(sex);
         user.setDescription(description);
-        user.setHobit(hobit);
 
         Long id = userService.saveUser(user);
-
-        // @TODO : farm_id 생성
-
-        return id + "번 유저 등록 완료";
+        return id;
     }
 
     @DeleteMapping("/delete")
@@ -68,8 +63,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Object login(@RequestParam String userId, String password) {
-        Optional<User> user = userService.findUserByUserId(userId);
+    public Object login(@RequestParam String accountId, String password) {
+        Optional<User> user = userService.findUserByUserAccountId(accountId);
 
         if (user.isPresent()) {
             if (user.get().checkPassword(password, passwordEncoder)) {

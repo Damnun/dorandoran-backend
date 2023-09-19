@@ -26,11 +26,7 @@ public class FarmService {
         return farmRepository.findById(id);
     }
 
-    public List<Farm> findFarmsByMapId(Long mapId) {
-        return farmRepository.findFarmsByMapId(mapId);
-    }
-
-    public List<Farm> findFarmsByVillageId(Long villageId) {
-        return farmRepository.findFarmsByVillageId(villageId);
+    public List<Farm> findFarmsByUserId(Long userId) {
+        return farmRepository.findFarmsByUserId(userId);
     }
 }

@@ -15,13 +15,12 @@ public class MapController {
     private final MapService mapService;
 
     @PostMapping("/create")
-    public String create(@RequestParam String name, String latitude, String longitude, Long userId, Long villageId) {
+    public String create(@RequestParam String name, String latitude, String longitude, Long userId) {
         Map map = new Map();
         map.setName(name);
         map.setLatitude(latitude);
         map.setLongitude(longitude);
         map.setUserId(userId);
-        map.setVillageId(villageId);
 
         Long id = mapService.saveMap(map);
 
@@ -42,11 +41,6 @@ public class MapController {
     @GetMapping("/findMapsByUserId")
     public List<Map> findMapsByUserId(@RequestParam Long userId) {
         return mapService.findMapsByUserId(userId);
-    }
-
-    @GetMapping("/findMapsByVillageId")
-    public List<Map> findMapsByVillageId(@RequestParam Long villageId) {
-        return mapService.findMapsByVillageId(villageId);
     }
 
 

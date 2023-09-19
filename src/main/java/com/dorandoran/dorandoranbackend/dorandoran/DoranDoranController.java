@@ -16,12 +16,11 @@ public class DoranDoranController {
     private final DoranDoranService dorandoranService;
 
     @PostMapping("/create")
-    public String create(@RequestParam String title, String description, Long userId, Long villageId) {
+    public String create(@RequestParam String title, String description, Long userId) {
         DoranDoran dorandoran = new DoranDoran();
         dorandoran.setTitle(title);
         dorandoran.setDescription(description);
         dorandoran.setUserId(userId);
-        dorandoran.setVillageId(villageId);
 
         Long id = dorandoranService.saveDoranDoran(dorandoran);
 
@@ -49,8 +48,8 @@ public class DoranDoranController {
         return dorandoranService.findDoranDoransByuserId(userId);
     }
 
-    @GetMapping("/findDoranDoransByVillageId")
-    public List<DoranDoran> findDoranDoransByVillageId(@RequestParam Long villageId) {
-        return dorandoranService.findDoranDoransByvillageId(villageId);
+    @GetMapping("/findAllDoranDornas")
+    public List<DoranDoran> findAllDoranDorans() {
+        return dorandoranService.findAllDoranDorans();
     }
 }

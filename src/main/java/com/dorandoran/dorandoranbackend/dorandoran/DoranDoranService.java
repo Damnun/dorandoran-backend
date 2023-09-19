@@ -36,9 +36,6 @@ public class DoranDoranService {
         return dorandoranRepository.findDoranDoransByUserId(userId);
     }
 
-    public List<DoranDoran> findDoranDoransByvillageId(Long villageId) {
-        return dorandoranRepository.findDoranDoransByVillageId(villageId);
-    }
 
     public List<DoranDoran> findAllDoranDorans() {
         return dorandoranRepository.findAllDoranDorans();

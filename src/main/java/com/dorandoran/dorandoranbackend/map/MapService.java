@@ -31,8 +31,4 @@ public class MapService {
         return mapRepository.findMapsByUserId(userId);
     }
 
-    public List<Map> findMapsByVillageId(Long villageId) {
-        return mapRepository.findMapsByVillageId(villageId);
-    }
-
 }

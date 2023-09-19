@@ -28,6 +28,4 @@ public class Map {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "village_id")
-    private Long villageId;
 }

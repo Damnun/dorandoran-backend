@@ -31,10 +31,4 @@ public class MapRepository {
                 .setParameter("userId", userId)
                 .getResultList();
     }
-
-    public List<Map> findMapsByVillageId(Long villageId) {
-        return em.createQuery("SELECT map FROM Map map WHERE map.villageId = :villageId", Map.class)
-                .setParameter("villageId", villageId)
-                .getResultList();
-    }
 }

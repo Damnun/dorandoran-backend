@@ -37,12 +37,6 @@ public class DoranDoranRepository {
                 .getResultList();
     }
 
-    public List<DoranDoran> findDoranDoransByVillageId(Long villageId) {
-        return em.createQuery("SELECT dorandoran FROM DoranDoran dorandoran WHERE dorandoran.villageId = :villageId", DoranDoran.class)
-                .setParameter("villageId", villageId)
-                .getResultList();
-    }
-
     public List<DoranDoran> findAllDoranDorans() {
         return em.createQuery("SELECT dorandoran From DoranDoran dorandoran", DoranDoran.class)
                 .getResultList();

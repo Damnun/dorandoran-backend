@@ -14,18 +14,18 @@ public class FarmController {
     private final FarmService farmService;
 
     @PostMapping("/create")
-    public String create(@RequestParam String name, String description, String species, String want, String why, Long mapId, Long villageId) {
+    public Long create(@RequestParam String name, String species, String want, String hobit, String why, String address, Long userId) {
         Farm farm = new Farm();
         farm.setName(name);
-        farm.setDescription(description);
         farm.setSpecies(species);
+        farm.setHobit(hobit);
         farm.setWant(want);
         farm.setWhy(why);
-        farm.setMapId(mapId);
-        farm.setVillageId(villageId);
+        farm.setAddress(address);
+        farm.setUserId(userId);
 
         Long farmId = farmService.saveFarm(farm);
-        return farmId + "번 농장 생성 완료";
+        return farmId;
     }
 
     @DeleteMapping("/delete")
@@ -39,13 +39,8 @@ public class FarmController {
         return farmService.findFarmByFarmId(id);
     }
 
-    @GetMapping("/findFarmsByMapId")
-    public List<Farm> findFarmsByMapId(Long mapId) {
-        return farmService.findFarmsByMapId(mapId);
-    }
-
     @GetMapping("/findFarmsByVillageId")
-    public List<Farm> findFarmsByVillageId(Long villageId) {
-        return farmService.findFarmsByVillageId(villageId);
+    public List<Farm> findFarmsByVillageId(Long userId) {
+        return farmService.findFarmsByUserId(userId);
     }
 }

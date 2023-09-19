@@ -16,13 +16,12 @@ public class EventController {
     private final EventService eventService;
 
     @PostMapping("/create")
-    public String create(@RequestParam String title, String description, String category, Integer status, Long villageId) {
+    public String create(@RequestParam String title, String description, String category, Integer status) {
         Event event = new Event();
         event.setTitle(title);
         event.setDescription(description);
         event.setCategory(category);
         event.setStatus(status);
-        event.setVillageId(villageId);
 
         Long id = eventService.saveEvent(event);
 
@@ -53,5 +52,10 @@ public class EventController {
     @GetMapping("/findEventsByStatus")
     public List<Event> findEventsByVillageId(@RequestParam Integer status) {
         return eventService.findEventsByEventStatus(status);
+    }
+
+    @GetMapping("/findAllEvents")
+    public List<Event> findAllEvents() {
+        return eventService.findAllEvents();
     }
 }
