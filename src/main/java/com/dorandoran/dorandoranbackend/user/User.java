@@ -20,10 +20,6 @@ public class User {
     @Column(name = "user_account_id")
     private String accountId;
 
-
-    @Column(name = "user_name")
-    private String name;
-
     @Column(name = "user_nickname")
     private String nickname;
 
@@ -39,11 +35,6 @@ public class User {
     @Column(name = "user_description")
     private String description;
 
-    @Column(name = "user_hobit")
-    private String hobit;
-
-    @Column(name = "farm_id")
-    private Long farmId;
 
     public User hashPassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(this.password);

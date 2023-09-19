@@ -19,9 +19,6 @@ public class Farm {
     @Column(name = "farm_name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "species")
     private String species;
 
@@ -31,10 +28,13 @@ public class Farm {
     @Column(name = "why")
     private String why;
 
-    @Column(name = "map_id")
-    private Long mapId;
+    @Column(name = "hobit")
+    private String hobit;
 
-    @Column(name = "village_id")
-    private Long villageId;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "userId")
+    private Long userId;
 
 }

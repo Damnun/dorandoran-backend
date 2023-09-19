@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,15 +25,10 @@ public class FarmRepository {
         return em.find(Farm.class, id);
     }
 
-    public List<Farm> findFarmsByMapId(Long mapId) {
-        return em.createQuery("SELECT farm FROM Farm farm WHERE farm.mapId = :mapId", Farm.class)
-                .setParameter("mapId", mapId)
-                .getResultList();
-    }
 
-    public List<Farm> findFarmsByVillageId(Long villageId) {
-        return em.createQuery("SELECT farm From Farm farm Where farm.villageId = :villageId", Farm.class)
-                .setParameter("villageId", villageId)
+    public List<Farm> findFarmsByUserId(Long userId) {
+        return em.createQuery("SELECT farm From Farm farm Where farm.userId = :userId", Farm.class)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 
