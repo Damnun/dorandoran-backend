@@ -25,10 +25,14 @@ public class FarmRepository {
         return em.find(Farm.class, id);
     }
 
-
     public List<Farm> findFarmsByUserId(Long userId) {
-        return em.createQuery("SELECT farm From Farm farm Where farm.userId = :userId", Farm.class)
+        return em.createQuery("SELECT farm FROM Farm farm Where farm.userId = :userId", Farm.class)
                 .setParameter("userId", userId)
+                .getResultList();
+    }
+
+    public List<Farm> findAllFarms() {
+        return em.createQuery("SELECT farm FROM Farm farm", Farm.class)
                 .getResultList();
     }
 

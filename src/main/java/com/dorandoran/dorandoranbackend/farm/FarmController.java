@@ -39,8 +39,13 @@ public class FarmController {
         return farmService.findFarmByFarmId(id);
     }
 
-    @GetMapping("/findFarmsByVillageId")
-    public List<Farm> findFarmsByVillageId(Long userId) {
+    @GetMapping("/findFarmsByUserId")
+    public List<Farm> findFarmsByUserId(Long userId) {
         return farmService.findFarmsByUserId(userId);
+    }
+
+    @GetMapping("/findAllFarms")
+    public List<Farm> findAllFarms() {
+        return farmService.findAllFarms();
     }
 }

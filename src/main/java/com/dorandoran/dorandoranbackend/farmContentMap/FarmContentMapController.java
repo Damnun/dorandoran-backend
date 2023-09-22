@@ -1,10 +1,12 @@
 package com.dorandoran.dorandoranbackend.farmContentMap;
 
+import com.dorandoran.dorandoranbackend.content.ContentService;
 import com.dorandoran.dorandoranbackend.farmContentMap.FarmContentMap;
 import com.dorandoran.dorandoranbackend.farmContentMap.FarmContentMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,6 +16,7 @@ import java.util.List;
 public class FarmContentMapController {
 
     private final FarmContentMapService farmContentMapService;
+    private final ContentService contentService;
 
     @PostMapping("/create")
     public String create(@RequestParam Long farmId, Long contentId) {
@@ -49,5 +52,19 @@ public class FarmContentMapController {
     @GetMapping("/findAllFarmContentMaps")
     public List<FarmContentMap> findAllFarmContentMaps() {
         return farmContentMapService.findAllFarmContentMaps();
+    }
+
+    @GetMapping("/findFarmContentUrlsByFarmId")
+    public List<FarmContentMapDTO> findFarmContentUrlsByFarmId(@RequestParam Long farmId) {
+        List<FarmContentMapDTO> result = new ArrayList<>();
+        List<FarmContentMap> farmContentMapList = farmContentMapService.findFarmContentMapsByFarmId(farmId);
+
+        farmContentMapList.forEach(farmContentMap -> {
+            FarmContentMapDTO currentFarmContentMapDTO = new FarmContentMapDTO();
+            currentFarmContentMapDTO.setFarmId(farmId);
+            currentFarmContentMapDTO.setContentUrl(contentService.findContentById(farmContentMap.getContentId()).getContentUrl());
+            result.add(currentFarmContentMapDTO);
+        });
+        return result;
     }
 }
