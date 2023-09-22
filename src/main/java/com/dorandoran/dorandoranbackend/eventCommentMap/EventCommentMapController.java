@@ -1,10 +1,12 @@
 package com.dorandoran.dorandoranbackend.eventCommentMap;
 
+import com.dorandoran.dorandoranbackend.comment.CommentService;
 import com.dorandoran.dorandoranbackend.eventCommentMap.EventCommentMap;
 import com.dorandoran.dorandoranbackend.eventCommentMap.EventCommentMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,6 +16,7 @@ import java.util.List;
 public class EventCommentMapController {
 
     private final EventCommentMapService eventCommentMapService;
+    private final CommentService commentService;
 
     @PostMapping("/create")
     public String create(@RequestParam Long eventId, Long commentId) {
@@ -49,5 +52,19 @@ public class EventCommentMapController {
     @GetMapping("/findAllEventCommentMaps")
     public List<EventCommentMap> findAllEventCommentMaps() {
         return eventCommentMapService.findAllEventCommentMaps();
+    }
+
+    @GetMapping("/findCommentsByEventId")
+    public List<EventCommentMapDTO> findCommentsByEventId(Long eventId) {
+        List<EventCommentMapDTO> result = new ArrayList<>();
+        List<EventCommentMap> eventCommentMapList = eventCommentMapService.findEventCommentMapsByEventId(eventId);
+
+        eventCommentMapList.forEach(eventCommentMap -> {
+            EventCommentMapDTO currentEventCommentMapDTO = new EventCommentMapDTO();
+            currentEventCommentMapDTO.setEventId(eventId);
+            currentEventCommentMapDTO.setComment(commentService.findCommentById(eventCommentMap.getCommentId()));
+            result.add(currentEventCommentMapDTO);
+        });
+        return result;
     }
 }
