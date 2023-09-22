@@ -1,10 +1,13 @@
 package com.dorandoran.dorandoranbackend.dorandoranContentMap;
 
+import com.dorandoran.dorandoranbackend.content.ContentService;
+import com.dorandoran.dorandoranbackend.dorandoranCommentMap.DoranDoranCommentMapDTO;
 import com.dorandoran.dorandoranbackend.dorandoranContentMap.DoranDoranContentMap;
 import com.dorandoran.dorandoranbackend.dorandoranContentMap.DoranDoranContentMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,7 @@ import java.util.List;
 public class DoranDoranContentMapController {
 
     private final DoranDoranContentMapService dorandoranContentMapService;
+    private final ContentService contentService;
 
     @PostMapping("/create")
     public String create(@RequestParam Long dorandoranId, Long contentId) {
@@ -49,5 +53,19 @@ public class DoranDoranContentMapController {
     @GetMapping("/findAllDoranDoranContentMaps")
     public List<DoranDoranContentMap> findAllDoranDoranContentMaps() {
         return dorandoranContentMapService.findAllDoranDoranContentMaps();
+    }
+
+    @GetMapping("/findContentUrlsByDoranDoranId")
+    public List<DoranDoranContentMapDTO> findContentUrlsByDoranDoranId(Long doranDoranId) {
+        List<DoranDoranContentMapDTO> result = new ArrayList<>();
+        List<DoranDoranContentMap> doranDoranContentMapList = dorandoranContentMapService.findDoranDoranContentMapsByDoranDoranId(doranDoranId);
+
+        doranDoranContentMapList.forEach(doranDoranContentMap -> {
+            DoranDoranContentMapDTO currentDoranDoranContentMapDTO = new DoranDoranContentMapDTO();
+            currentDoranDoranContentMapDTO.setDoranDoranId(doranDoranId);
+            currentDoranDoranContentMapDTO.setContentUrl(contentService.findContentById(doranDoranContentMap.getContentId()).getContentUrl());
+            result.add(currentDoranDoranContentMapDTO);
+        });
+        return result;
     }
 }

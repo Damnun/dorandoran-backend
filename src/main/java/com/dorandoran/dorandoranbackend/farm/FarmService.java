@@ -29,4 +29,8 @@ public class FarmService {
     public List<Farm> findFarmsByUserId(Long userId) {
         return farmRepository.findFarmsByUserId(userId);
     }
+
+    public List<Farm> findAllFarms() {
+        return farmRepository.findAllFarms();
+    }
 }

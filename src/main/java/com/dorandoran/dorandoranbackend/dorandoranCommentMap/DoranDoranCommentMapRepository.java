@@ -41,4 +41,5 @@ public class DoranDoranCommentMapRepository {
         return em.createQuery("SELECT eum FROM DoranDoranCommentMap eum", DoranDoranCommentMap.class)
                 .getResultList();
     }
+
 }

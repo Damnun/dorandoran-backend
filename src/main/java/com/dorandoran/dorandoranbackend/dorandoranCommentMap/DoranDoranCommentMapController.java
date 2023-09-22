@@ -1,10 +1,13 @@
 package com.dorandoran.dorandoranbackend.dorandoranCommentMap;
 
+import com.dorandoran.dorandoranbackend.comment.Comment;
+import com.dorandoran.dorandoranbackend.comment.CommentService;
 import com.dorandoran.dorandoranbackend.dorandoranCommentMap.DoranDoranCommentMap;
 import com.dorandoran.dorandoranbackend.dorandoranCommentMap.DoranDoranCommentMapService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,7 @@ import java.util.List;
 public class DoranDoranCommentMapController {
 
     private final DoranDoranCommentMapService dorandoranCommentMapService;
+    private final CommentService commentService;
 
     @PostMapping("/create")
     public String create(@RequestParam Long dorandoranId, Long commentId) {
@@ -50,4 +54,19 @@ public class DoranDoranCommentMapController {
     public List<DoranDoranCommentMap> findAllDoranDoranCommentMaps() {
         return dorandoranCommentMapService.findAllDoranDoranCommentMaps();
     }
+
+    @GetMapping("/findDoranDoranCommentsByDoranDoranId")
+    public List<DoranDoranCommentMapDTO> findDoranDoranCommentsByDoranDoranId(Long doranDoranId, Comment comment) {
+        List<DoranDoranCommentMapDTO> result = new ArrayList<>();
+        List<DoranDoranCommentMap> commentMapList = dorandoranCommentMapService.findDoranDoranCommentMapsByDoranDoranId(doranDoranId);
+
+        commentMapList.forEach(commentMap -> {
+            DoranDoranCommentMapDTO currentDoranDoranCommentMapDTO = new DoranDoranCommentMapDTO();
+            currentDoranDoranCommentMapDTO.setComment(commentService.findCommentById(commentMap.getCommentId()));
+            currentDoranDoranCommentMapDTO.setDoranDoranId(doranDoranId);
+            result.add(currentDoranDoranCommentMapDTO);
+        });
+        return result;
+    }
+
 }

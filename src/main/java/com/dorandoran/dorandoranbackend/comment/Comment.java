@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CurrentTimestamp;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @Getter
@@ -24,7 +24,7 @@ public class Comment {
 
     @CurrentTimestamp
     @Column(name = "comment_created")
-    private Timestamp created;
+    private String created;
 
     @Column(name = "comment_status")
     private Integer status;
