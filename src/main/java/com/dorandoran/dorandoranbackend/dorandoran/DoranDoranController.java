@@ -48,7 +48,7 @@ public class DoranDoranController {
         return dorandoranService.findDoranDoransByuserId(userId);
     }
 
-    @GetMapping("/findAllDoranDornas")
+    @GetMapping("/findAllDoranDorans")
     public List<DoranDoran> findAllDoranDorans() {
         return dorandoranService.findAllDoranDorans();
     }
