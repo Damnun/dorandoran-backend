@@ -65,6 +65,7 @@ public class ContentController {
                 farmContentMapService.saveFarmContentMap(farmContentMap);
             }
         }
+
         return uploadedFileIdList;
     }
 
@@ -78,4 +79,10 @@ public class ContentController {
     public Content findContentByContentId(@RequestParam Long contentId) {
         return contentService.findContentById(contentId);
     }
+
+    @GetMapping("/findAllContents")
+    public List<Content> findAllContents() {
+        return contentService.findAllContents();
+    }
+
 }
