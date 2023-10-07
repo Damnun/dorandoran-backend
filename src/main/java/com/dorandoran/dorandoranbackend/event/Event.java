@@ -40,4 +40,6 @@ public class Event {
     @Column(name = "event_deleted")
     private Timestamp deleted;
 
+    @Column(name = "user_id")
+    private Long userId;
 }

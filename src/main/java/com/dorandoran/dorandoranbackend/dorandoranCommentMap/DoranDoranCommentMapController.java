@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dorandoranCommentMap")
+@RequestMapping("/api/dorandoranCommentMap")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DoranDoranCommentMapController {

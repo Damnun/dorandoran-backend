@@ -43,4 +43,8 @@ public class EventService {
     public List<Event> findAllEvents() {
         return eventRepository.findAllEvents();
     }
+
+    public List<Event> findEventsByUserId(Long userId) {
+        return eventRepository.findEventsByUserId(userId);
+    }
 }
