@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/event")
+@RequestMapping("/api/event")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EventController {
@@ -16,12 +16,13 @@ public class EventController {
     private final EventService eventService;
 
     @PostMapping("/create")
-    public String create(@RequestParam String title, String description, String category, Integer status) {
+    public String create(@RequestParam String title, String description, String category, Integer status, Long userId) {
         Event event = new Event();
         event.setTitle(title);
         event.setDescription(description);
         event.setCategory(category);
         event.setStatus(status);
+        event.setUserId(userId);
 
         Long id = eventService.saveEvent(event);
 
@@ -57,5 +58,10 @@ public class EventController {
     @GetMapping("/findAllEvents")
     public List<Event> findAllEvents() {
         return eventService.findAllEvents();
+    }
+
+    @GetMapping("/findEventsByUserId")
+    public List<Event> findEventsByUserId(Long userId) {
+        return eventService.findEventsByUserId(userId);
     }
 }

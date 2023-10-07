@@ -48,4 +48,10 @@ public class EventRepository {
                 .getResultList();
     }
 
+    public List<Event> findEventsByUserId(Long userId) {
+        return em.createQuery("SELECT event FROM Event event WHERE event.userId = : userId", Event.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+
 }

@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
-@RequestMapping("/benefit")
+@RequestMapping("/api/benefit")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BenefitController {
